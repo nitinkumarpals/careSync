@@ -1,5 +1,6 @@
 package com.nitin.pal.careSync.entity;
 
+import com.nitin.pal.careSync.entity.type.BloodGroupType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,4 +41,7 @@ public class Patient {
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    @Enumerated(EnumType.STRING)
+    private BloodGroupType bloodGroup;
 }

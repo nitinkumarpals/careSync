@@ -30,12 +30,16 @@ public class PatientTests {
     public void testTransactionMethods(){
 //        Patient patient = patientService.getPatientById(27L);
 //        Patient patient= patientRepository.findByName("Diya Patel");
-        List<Patient> patientList = patientRepository.findByBirthDateOrEmail(LocalDate.of(1988,3,15),"kabir.singh@example.com" );
-        System.out.println(patientList);
-//        List<Patient> patientList2 = patientRepository.findByBornAfterDate(LocalDate.of(1993,3,14));
-        List<Object[]> bloodGroupByTypeList = patientRepository.countEachBloodGroupByType();
-        for (Object[] patient: bloodGroupByTypeList){
-            System.out.println(patient[0]+" "+ patient[1]);
+//        List<Patient> patientList = patientRepository.findByBirthDateOrEmail(LocalDate.of(1988,3,15),"kabir.singh@example.com" );
+//        System.out.println(patientList);
+////        List<Patient> patientList2 = patientRepository.findByBornAfterDate(LocalDate.of(1993,3,14));
+//        List<Object[]> bloodGroupByTypeList = patientRepository.countEachBloodGroupByType();
+//        for (Object[] patient: bloodGroupByTypeList){
+//            System.out.println(patient[0]+" "+ patient[1]);
+//        }
+        List<Patient> allPatient = patientRepository.findAllPatient();
+        for (Patient patient: allPatient){
+            System.out.println(patient);
         }
     }
 }

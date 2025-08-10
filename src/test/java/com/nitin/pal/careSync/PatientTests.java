@@ -37,9 +37,11 @@ public class PatientTests {
 //        for (Object[] patient: bloodGroupByTypeList){
 //            System.out.println(patient[0]+" "+ patient[1]);
 //        }
-        List<Patient> allPatient = patientRepository.findAllPatient();
-        for (Patient patient: allPatient){
-            System.out.println(patient);
-        }
+//        List<Patient> allPatient = patientRepository.findAllPatient();
+//        for (Patient patient: allPatient){
+//            System.out.println(patient);
+//        }
+        int rowsUpdated = patientRepository.updateNameWithId("Arav sharma",28L);
+        System.out.println(rowsUpdated);
     }
 }

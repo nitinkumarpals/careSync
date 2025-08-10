@@ -2,7 +2,9 @@ package com.nitin.pal.careSync.repository;
 
 import com.nitin.pal.careSync.entity.Patient;
 import com.nitin.pal.careSync.entity.type.BloodGroupType;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -30,4 +32,9 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
 
     @Query(value = "SELECT * FROM patient",nativeQuery = true)
     List<Patient> findAllPatient();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Patient p SET p.name = :name where p.id = :id")
+    int updateNameWithId(@Param("name") String name, @Param("id") Long id);
 }

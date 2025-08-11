@@ -1,8 +1,11 @@
 package com.nitin.pal.careSync.repository;
 
+import com.nitin.pal.careSync.dto.BloodGroupCountResponseEntity;
 import com.nitin.pal.careSync.entity.Patient;
 import com.nitin.pal.careSync.entity.type.BloodGroupType;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -27,11 +30,11 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
     @Query("SELECT p FROM Patient p where p.birthDate > :birthDate")
     List<Patient> findByBornAfterDate(@Param("birthDate") LocalDate birthDate);
 
-    @Query("SELECT p.bloodGroup, Count(p) FROM Patient p group by p.bloodGroup")
-    List<Object[]> countEachBloodGroupByType();
+    @Query("SELECT new com.nitin.pal.careSync.dto.BloodGroupCountResponseEntity(p.bloodGroup, Count(p)) FROM Patient p group by p.bloodGroup")
+    List<BloodGroupCountResponseEntity> countEachBloodGroupByType();
 
     @Query(value = "SELECT * FROM patient",nativeQuery = true)
-    List<Patient> findAllPatient();
+    Page<Patient> findAllPatient(Pageable pageable);
 
     @Transactional
     @Modifying

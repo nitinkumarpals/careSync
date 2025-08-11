@@ -1,5 +1,6 @@
 package com.nitin.pal.careSync;
 
+import com.nitin.pal.careSync.dto.BloodGroupCountResponseEntity;
 import com.nitin.pal.careSync.entity.Patient;
 import com.nitin.pal.careSync.entity.type.BloodGroupType;
 import com.nitin.pal.careSync.repository.PatientRepository;
@@ -7,6 +8,9 @@ import com.nitin.pal.careSync.service.PatientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -43,5 +47,15 @@ public class PatientTests {
 //        }
         int rowsUpdated = patientRepository.updateNameWithId("Arav sharma",28L);
         System.out.println(rowsUpdated);
+
+        List<BloodGroupCountResponseEntity> bloodGroupList = patientRepository.countEachBloodGroupByType();
+        for (BloodGroupCountResponseEntity bloodGroupCountResponseEntity: bloodGroupList){
+            System.out.println(bloodGroupCountResponseEntity);
+        }
+
+        Page<Patient> allPatient = patientRepository.findAllPatient(PageRequest.of(0, 2, Sort.by("name")));
+        for (Patient patient: allPatient){
+            System.out.println(patient);
+        }
     }
 }

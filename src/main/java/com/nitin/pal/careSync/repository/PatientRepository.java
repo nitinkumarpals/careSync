@@ -21,7 +21,6 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
     List<Patient> findByBirthDateOrEmail(LocalDate birthDate, String email);
 
     List<Patient> findByBirthDateBetween(LocalDate startDate, LocalDate endDate);
-
     List<Patient> findByNameContainingOrderByIdDesc(String name);
 
     @Query("SELECT p FROM Patient p where p.bloodGroup = :bloodGroup")

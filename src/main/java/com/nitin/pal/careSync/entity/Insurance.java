@@ -34,6 +34,6 @@ public class Insurance {
     @Column(nullable = false,updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToOne(mappedBy = "insurance")
+    @OneToOne(mappedBy = "insurance")//it is telling it is coming from "insurance" inside patient and this is inverse side
     private Patient patient;
 }

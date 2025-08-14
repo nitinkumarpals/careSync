@@ -47,11 +47,10 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})//PERSIST is useful when we save for first time and MERGE is useful when we update
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)//PERSIST is useful when we save for first time and MERGE is useful when we update
     @JoinColumn(name = "patient_insurance_id")//owning side
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "patient")//One patient To Many appointment
-    @ToString.Exclude
+    @OneToMany(mappedBy = "patient", cascade = {CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)//One patient To Many appointment
     private List<Appointment> appointments = new ArrayList<>();
 }

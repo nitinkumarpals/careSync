@@ -24,4 +24,11 @@ public class InsuranceService {
         insurance.setPatient(patient);// bidirectional consistency maintenance in case we use insurance letter in this scope
         return patient;
     }
+
+    @Transactional
+    public Patient disaccociateInsuranceFromPatient(Long patientId){
+        Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new EntityNotFoundException("Patient with id: " + patientId + " not found"));
+        patient.setInsurance(null);
+        return patient;
+    }
 }
